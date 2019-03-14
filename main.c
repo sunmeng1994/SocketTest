@@ -45,10 +45,14 @@ int main()
 	{
 	    printf("accept socket error:");
 	}
-	n=recv(connfd,buff,MAXLINE,0);
-        buff[n]='\0';
-	printf("recv msg from client :%S\n",buff);
-        close(connfd);
+	else
+	{
+	    printf("fucking connect success!\n");
+	    n=recv(connfd,buff,MAXLINE,0);
+	    buff[n]='\0';
+	    printf("recv msg from client :%S\n",buff);
+	    close(connfd);
+	}
     }
     close(listenfd);
 }
