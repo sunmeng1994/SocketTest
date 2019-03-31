@@ -50,7 +50,7 @@ int main()
 	    printf("fucking connect success!\n");
 	    n=recv(connfd,buff,MAXLINE,0);
 	    buff[n]='\0';
-	    printf("recv msg from client :%S\n",buff);
+	    printf("recv msg from client :%s\n",buff);
 	    close(connfd);
 	}
     }
