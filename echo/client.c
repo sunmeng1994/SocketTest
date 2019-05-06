@@ -13,15 +13,29 @@
 int main(int argc, const char * argv[]) {
     // insert code here...
     int sockfd;
-    char*message="go fuck yourself";
+    char* message="gofuck";
     struct sockaddr_in servaddr;
+    
     sockfd=socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd<0)
+    {
+	printf("create socket error\n");
+    }
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family=AF_INET;
-    inet_pton(AF_INET,"116.85.49.169",&servaddr.sin_addr);
+    if(inet_pton(AF_INET,"165.85.49.169",&servaddr.sin_addr)<=0)
+    {
+	printf("inet_pton error\n");
+    }
     servaddr.sin_port=htons(6666);
-    connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
+    if(connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr))<0)
+    {
+	printf("connect error\n");
+	return 0;
+    }
+    
     write(sockfd,message,strlen(message));
+    printf("write success!\n");
     char buf[64];
     memset(buf, 0, sizeof(buf));
     int n=read(sockfd,buf,sizeof(buf)-1);
